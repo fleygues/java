@@ -118,6 +118,7 @@ public class LegacyEventBroadcaster implements EventBroadcaster {
     V1Event recordingEvent = eventAndPatch.get().getLeft();
     V1Patch patch = eventAndPatch.get().getRight();
     for (int retries = 0; retries < maxTriesPerEvent; retries++) {
+      if (event.getCount()==null) event.setCount(1); // <fleygues> 
       if (recordEvent(recordingEvent, patch, event.getCount() > 1)) {
         break;
       }
